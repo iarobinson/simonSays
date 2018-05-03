@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Play Simon Says</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <script src="theBrainOfSimon.js"></script>
+</head>
+
+<body>
+  <div id="buttonInterface">
+    <a onclick="buttonClicked('r');"<div id="r" class="mainGameButton"></div></a>
+    <a onclick="buttonClicked('b');"<div id="b" class="mainGameButton"></div></a>
+    <a onclick="buttonClicked('g');"<div id="g" class="mainGameButton"></div></a>
+    <a onclick="buttonClicked('y');"<div id="y" class="mainGameButton"></div></a>
+  </div>
+  
+  <div id="adminControls">
+    <button onclick="startOrStopGame()">Start/Stop</button>
+    <button onclick="resetGame()">Reset</button>
+  </div>
+  <center>
+    <p>Strict mode?*</p>
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
+    <p id="completedLevels">0</p>
+  </center>
+</body>
+</html>
