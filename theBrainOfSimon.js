@@ -4,6 +4,7 @@ var gameSequence = [];
 var playerSequence = [];
 var levelCount = 0;
 var listenToPlayer = false;
+var strictMode = false;
 
 window.onload = init;
 
@@ -17,12 +18,23 @@ function init() {
   // Assign variables to start and stop buttons
   var startStopButton = document.getElementById('startStopButton');
   var resetButton = document.getElementById('resetButton');
-
-  addToGameSequence();
   
   // This will be the operations board of the game
   startStopButton.onclick = startGame;
   resetButton.onclick = resetGame;
+}
+
+// Manage what happens when user click Start/Stop
+function startGame() {  
+  addToGameSequence();
+  animateSequence(gameSequence);
+  gameLoop();
+}
+
+function resetGame() {
+  gameSequence = [];
+  playerSequence = [];
+  levelCount = 0;
 }
 
 // Create a function which can add new random elements to an array.
@@ -32,10 +44,8 @@ function addToGameSequence() {
   gameSequence.push(newColor);
 }
 
-// Manage what happens when user click Start/Stop
-function startGame() {  
-  addToGameSequence();
-  animateSequence(gameSequence);
+function gameLoop() {
+  
 }
 
 // What happens when a button is clicked
@@ -44,6 +54,8 @@ function pressColorButton(color) {
     animate(color);
     playerSequence.push(color);
   }
+  
+  checkSequence();
 }
 
 // Functionality for the fade effect on colorButtons
@@ -93,22 +105,20 @@ function animateSequence(seq) {
 }
 
 // This will test playerSequence against gameSequence
-function checkSequence(playerSequence, gameSequence) {
-  if (playerSequence.length === 0) {
-    return true;
-  } else {
+function checkSequence() {
+  if (playerSequence.length === gameSequence.length) {
+    
+    // Check to see if playerSequence has errors compared to gameSequence 
     for (var i = 0; i < playerSequence.length; i += 1) {
       if (playerSequence[i] !== gameSequence[i]) {
+        console.log('Player Loses function');
         return false;
+      } else { // If they match, add color to gameSequence and animateSequence
+        playerSequence = [];
+        addToGameSequence();
+        levelCount += 1;
+        animateSequence(gameSequence);
       }
     }
   }
-  
-  return true;
-}
-
-function resetGame() {
-  gameSequence = [];
-  playerSequence = [];
-  levelCount = 0;
 }
