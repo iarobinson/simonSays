@@ -9,12 +9,16 @@ body {
   float: left;
 }
 
+/* .mainGameButton:hover {
+  opacity: .8;
+} */
+
 #r { background-color: red; }
 #b { background-color: blue; }
 #g { background-color: green; }
 #y { background-color: yellow; }
 
-#startButton:hover { opacity: .5; }
+#startStopButton:hover { opacity: .5; }
 #resetButton:hover { opacity: .5; }
 
 button {
