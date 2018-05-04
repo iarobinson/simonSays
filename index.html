@@ -11,15 +11,15 @@
 
 <body>
   <div id="buttonInterface">
-    <a onclick="buttonClicked(this);"<div id="r" class="mainGameButton"></div></a>
-    <a onclick="buttonClicked(this);"<div id="b" class="mainGameButton"></div></a>
-    <a onclick="buttonClicked(this);"<div id="g" class="mainGameButton"></div></a>
-    <a onclick="buttonClicked(this);"<div id="y" class="mainGameButton"></div></a>
+    <a onclick="buttonClicked(this);"><div id="r" class="mainGameButton"></div></a>
+    <a onclick="buttonClicked(this);"><div id="b" class="mainGameButton"></div></a>
+    <a onclick="buttonClicked(this);"><div id="g" class="mainGameButton"></div></a>
+    <a onclick="buttonClicked(this);"><div id="y" class="mainGameButton"></div></a>
   </div>
   
   <div id="adminControls">
-    <button onclick="startOrStopGame()">Start/Stop</button>
-    <button onclick="resetGame()">Reset</button>
+    <button id="startButton" onclick="startOrStopGame()">Start/Stop</button>
+    <button id="resetButton" onclick="resetGame()">Reset</button>
   </div>
   <center>
     <p>Strict mode?*</p>
