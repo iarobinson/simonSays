@@ -2,7 +2,7 @@
 var redButton, blueButton, greenButton, yellowButton;
 var gameSequence = [];
 var playerSequence = [];
-var levelCount = 0;
+var currentLevel = 0;
 var listenToPlayer = false;
 var strictMode = false;
 
@@ -14,6 +14,9 @@ function init() {
   blueButton = document.getElementById('b');
   greenButton = document.getElementById('g');
   yellowButton = document.getElementById('y');
+  
+  // Completed Level Counter
+  levelSpace = document.getElementById('completedLevels');
   
   // Assign variables to start and stop buttons
   var startStopButton = document.getElementById('startStopButton');
@@ -34,7 +37,7 @@ function startGame() {
 function resetGame() {
   gameSequence = [];
   playerSequence = [];
-  levelCount = 0;
+  currentLevel = 0;
 }
 
 // Create a function which can add new random elements to an array.
@@ -116,7 +119,8 @@ function checkSequence() {
       } else { // If they match, add color to gameSequence and animateSequence
         playerSequence = [];
         addToGameSequence();
-        levelCount += 1;
+        currentLevel += 1;
+        levelSpace.innerHTML = currentLevel;
         animateSequence(gameSequence);
       }
     }
