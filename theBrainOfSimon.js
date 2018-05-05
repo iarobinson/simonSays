@@ -3,34 +3,34 @@ var redButton, blueButton, greenButton, yellowButton;
 var gameSequence = [];
 var playerSequence = [];
 var currentLevel = 0;
-var listenToPlayer = true;
+var listenToPlayer = false;
 var strictMode = false;
 var intervalId;
 
 window.onload = init;
-
 function init() {
-  // Assign variables to buttons
+  // Assign variables to the four colored buttons
   redButton = document.getElementById("r");
   blueButton = document.getElementById("b");
   greenButton = document.getElementById("g");
   yellowButton = document.getElementById("y");
 
-  // Completed Level Counter
+  // Assign variable to game display
   levelSpace = document.getElementById("completedLevels");
 
   // Assign variables to start and stop buttons
   var startStopButton = document.getElementById("startStopButton");
   var resetButton = document.getElementById("resetButton");
 
-  // This will be the operations board of the game
+  // Event listeners to trigger start and reset functions when buttons are clicked 
   startStopButton.onclick = startGame;
   resetButton.onclick = resetGame;
 
+  // Displays initial instructions to user
   levelSpace.innerHTML = "Press Start/Stop to Begin";
 }
 
-// Manage what happens when user click Start/Stop
+// Manage what happens when user clicks Start/Stop
 function startGame() {
   levelSpace.innerHTML = "0";
   addToGameSequence();
@@ -45,6 +45,7 @@ function animateSequence(seq) {
   function playSequence() {
     // Clear interval after gameSequence plays to end
     if (runCount >= seq.length - 1) {
+      listenToPlayer = true;
       clearInterval(intervalId);
     }
 
@@ -52,7 +53,7 @@ function animateSequence(seq) {
     animate(seq[runCount]);
     runCount += 1;
   }
-
+  listenToPlayer = false;
   intervalId = setInterval(playSequence, 1000);
 }
 
@@ -138,3 +139,7 @@ function incrementSuccess() {
   levelSpace.innerHTML = currentLevel;
   animateSequence(gameSequence);
 }
+
+
+
+
