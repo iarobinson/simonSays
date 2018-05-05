@@ -63,7 +63,7 @@ function animateSequence() {
     runCount += 1;
   }
   listenToPlayer = false;
-  if (gameSequence.length > 2) {
+  if (gameSequence.length > 20) {
     gameWon();
   } else {
     intervalId = setInterval(playSequence, 1000);
