@@ -12,11 +12,12 @@ body {
 
 p {
   color: white;
+  font-size: 20px;
 }
 
-/* .mainGameButton:hover {
-  opacity: .8;
-} */
+.mainGameButton:hover {
+  opacity: .9;
+}
 
 #r { background-color: red; }
 #b { background-color: blue; }
@@ -30,13 +31,12 @@ button {
   width: 50%;
   float: left;
   height: 50px;
-  font-size: 25px;
+  font-size: 30px;
   margin: 20px 0px 0px 0px;
   border: none;
   background-color: black;
   padding: 0px 0px 0px 0px;
   color: white;
-
 }
 
 button:active {
@@ -58,19 +58,14 @@ button.active {
 }
 
 #completedLevels {
-  font-size: 40px;
-  margin: 20px 0px 20px 0px;
+  font-size: 30px;
+  margin: 20px 20px 20px 20px;
   /* The below CSS is aimed at centering the element on buttons */
   /* position: absolute;
   left: 200px;
   top: 100px;
   z-index: 1;
   color: white; */
-}
-
-#strictMode {
-  font-size: 40px;
-  margin: 0px 0px 0px 0px;
 }
 
 /* Related to the switch that turns on strict mode */
@@ -128,4 +123,23 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 100%;
+}
+
+/* Footer CSS */
+
+footer {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+a {
+  font-size: 12px;
+  color: #333333;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
 }

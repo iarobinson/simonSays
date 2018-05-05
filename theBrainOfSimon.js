@@ -18,6 +18,7 @@ var defeatSound = new Audio("sounds/soundOfVictory.mp3");
 window.onload = init;
 
 function init() {
+  console.log("Thank you for your interest. To learn more, visit me at ianrobinson.net");
   // Assign variables to the four colored buttons
   redButton = document.getElementById("r");
   blueButton = document.getElementById("b");
