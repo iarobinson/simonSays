@@ -1,11 +1,11 @@
 // Does the game listen to user input?
 var redButton, blueButton, greenButton, yellowButton, intervalId;
+var currentLevel = 0;
 var gameSequence = [];
 var playerSequence = [];
-var currentLevel = 0;
-var listenToPlayer = false;
 var strictMode = false;
-
+var listenToPlayer = false;
+var winningLevel = 3;
 
 // Assign audio to variables
 var redSound = new Audio("sounds/soundOfRed.mp3");
@@ -63,18 +63,15 @@ function animateSequence() {
     runCount += 1;
   }
   listenToPlayer = false;
-  if (gameSequence.length > 20) {
-    gameWon();
-  } else {
-    intervalId = setInterval(playSequence, 1000);
-  }
+
+  intervalId = setInterval(playSequence, 1000);
 }
 
 // When player resets game
 function resetGame() {
   gameSequence = [];
   playerSequence = [];
-  levelSpace.innerHTML = "Press Start/Stop to Begin";
+  currentLevel = 0;
   clearInterval(intervalId);
 }
 
@@ -85,61 +82,33 @@ function addToGameSequence() {
   gameSequence.push(newColor);
 }
 
-// What happens when a button is clicked
+// What happens when a button is clicked by the user
 function pressColorButton(color) {
   if (listenToPlayer === true) {
     animate(color);
     playerSequence.push(color);
-    checkSequence();
+
+    if (!sequencesMatch() && strictMode) {
+      gameLost();
+    } else if (!sequencesMatch()) {
+      wrongSequenceTryAgain();
+    } else if (playerSequence.length === gameSequence.length && gameSequence.length === winningLevel) {
+      gameWon();
+    } else if (playerSequence.length === gameSequence.length) {
+      incrementSuccess();
+    }
   }
 }
 
-// How the animation works
-function animate(element) {
-  var animateIntervalId;
-
-  var opacity = 0.1;  // initial opacity
-  element.style.display = "block";
-
-  function fadeAnimation() {
-    if (opacity >= 1){
-        clearInterval(animateIntervalId);
-    }
-
-    element.style.opacity = opacity;
-    element.style.filter = "alpha(opacity=" + opacity * 100 + ")";
-    opacity += 0.5 * opacity;
-    soundTheColor(element);
-  }
-
-  animateIntervalId = setInterval(fadeAnimation, 10);
-}
-
-// This will test playerSequence against gameSequence
-function checkSequence() {
-  if (playerSequence.length === gameSequence.length) {
-    // Check to see if playerSequence has errors compared to gameSequence
-    for (var i = 0; i < playerSequence.length; i += 1) {
-
-      if (!sequencesMatch() && strictMode) {
-      // First, if strict mode is on and sequences don't match, end game
-        levelSpace.innerHTML = "Game Over,<br>You Achieved Level " + currentLevel + "<br>Congratulations";
-        resetGame();
-      } else if (!sequencesMatch() && !strictMode) {
-      // Now, if strict mode is off and sequences don't match, restart level
-        animate(redButton);
-        animate(blueButton);
-        animate(greenButton);
-        animate(yellowButton);
-        playerSequence = [];
-        levelSpace.innerHTML = "Wrong Sequence, try again";
-        animateSequence()
-      } else {
-      // If they match, add new random color to gameSequence and animateSequence
-        incrementSuccess();
-      }
-    }
-  }
+// What happens when user types inaccurate sequence
+function wrongSequenceTryAgain() {
+  animate(redButton);
+  animate(blueButton);
+  animate(greenButton);
+  animate(yellowButton);
+  playerSequence = [];
+  levelSpace.innerHTML = "Wrong Sequence, try again";
+  animateSequence()
 }
 
 // Checks if playersSequence matches gameSequence
@@ -150,6 +119,27 @@ function sequencesMatch() {
     }
   }
   return true;
+}
+
+// How the animation works
+function animate(element) {
+  var animateIntervalId;
+  
+  var opacity = 0.1;  // initial opacity
+  element.style.display = "block";
+  
+  function fadeAnimation() {
+    if (opacity >= 1){
+      clearInterval(animateIntervalId);
+    }
+    
+    element.style.opacity = opacity;
+    element.style.filter = "alpha(opacity=" + opacity * 100 + ")";
+    opacity += 0.1 * opacity;
+    soundTheColor(element);
+  }
+  
+  animateIntervalId = setInterval(fadeAnimation, 10);
 }
 
 // The resulting code for when a player provides correct sequence
@@ -174,6 +164,13 @@ function toggleStrict() {
 function gameWon() {
   victorySound.play();
   levelSpace.innerHTML = "Congratulations, You've Won";
+  resetGame();
+}
+
+// What happens when the game is lost
+function gameLost() {
+  levelSpace.innerHTML = "Game Over, You Achieved Level " + currentLevel + " Congratulations";
+  resetGame();
 }
 
 // Play individual sound for each color
@@ -188,4 +185,7 @@ function soundTheColor(color) {
     yellowSound.play();
   }
 }
+
+
+
 
