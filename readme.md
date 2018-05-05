@@ -1,6 +1,9 @@
 # Simon Says
 
-Simon Says is a simple game which I hope will display my ability to write more complex software. This is part of my Free Code Camp curriculum. More of my projects can be found at code.ianrobinson.net
+Simon Says is a simple game which I hope will display my ability to write more complex software.
+
+You can see the game in action here:
+https://iarobinson.github.io/simonSays/
 
 ## Technology
 
