@@ -12,6 +12,7 @@ var redSound = new Audio("sounds/soundOfRed.mp3");
 var blueSound = new Audio("sounds/soundOfBlue.mp3");
 var greenSound = new Audio("sounds/soundOfGreen.mp3");
 var yellowSound = new Audio("sounds/soundOfYellow.mp3");
+var victorySound = new Audio("sounds/soundOfVictory.mp3");
 
 window.onload = init;
 function init() {
@@ -62,7 +63,7 @@ function animateSequence() {
     runCount += 1;
   }
   listenToPlayer = false;
-  if (gameSequence.length > 20) {
+  if (gameSequence.length > 2) {
     gameWon();
   } else {
     intervalId = setInterval(playSequence, 1000);
@@ -122,7 +123,6 @@ function checkSequence() {
 
       if (!sequencesMatch() && strictMode) {
       // First, if strict mode is on and sequences don't match, end game
-        console.log("Player Loses function");
         levelSpace.innerHTML = "Game Over,<br>You Achieved Level " + currentLevel + "<br>Congratulations";
         resetGame();
       } else if (!sequencesMatch() && !strictMode) {
@@ -172,6 +172,7 @@ function toggleStrict() {
 
 // What happens when a game is won
 function gameWon() {
+  victorySound.play();
   levelSpace.innerHTML = "Congratulations, You've Won";
 }
 
