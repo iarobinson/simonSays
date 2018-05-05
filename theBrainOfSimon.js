@@ -20,10 +20,12 @@ function init() {
 
   // Assign variables to start and stop buttons
   var startStopButton = document.getElementById("startStopButton");
+  var strictSwitch = document.getElementById("strictSwitch");
   var resetButton = document.getElementById("resetButton");
 
   // Event listeners to trigger start and reset functions when buttons are clicked 
   startStopButton.onclick = startGame;
+  strictSwitch.onclick = toggleStrict;
   resetButton.onclick = resetGame;
 
   // Displays initial instructions to user
@@ -74,7 +76,6 @@ function addToGameSequence() {
 
 // What happens when a button is clicked
 function pressColorButton(color) {
-  console.log(listenToPlayer, "<-listenToPlayer");
   if (listenToPlayer === true) {
     animate(color);
     playerSequence.push(color);
@@ -106,6 +107,7 @@ function animate(element) {
 function checkSequence() {
   console.log(gameSequence, "<-gameSequence");
   console.log(playerSequence, "<-playerSequence");
+  console.log(strictMode, "<-strictMode");
 
   if (playerSequence.length === gameSequence.length) {
     // Check to see if playerSequence has errors compared to gameSequence
@@ -140,6 +142,14 @@ function incrementSuccess() {
   animateSequence(gameSequence);
 }
 
+// Toggles Strict Mode
+function toggleStrict() {
+  if (strictMode) {
+    strictMode = false;
+  } else if (!strictMode) {
+    strictMode = true;
+  }
+}
 
 
 
