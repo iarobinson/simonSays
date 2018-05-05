@@ -5,7 +5,7 @@ var gameSequence = [];
 var playerSequence = [];
 var strictMode = false;
 var listenToPlayer = false;
-var winningLevel = 3;
+var winningLevel = 20;
 
 // Assign audio to variables
 var redSound = new Audio("sounds/soundOfRed.mp3");
