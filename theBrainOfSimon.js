@@ -40,19 +40,19 @@ function startGame() {
 }
 
 // Play the gameSequence
-function animateSequence(seq) {
+function animateSequence() {
   var runCount = 0;
   playerSequence = [];
 
   function playSequence() {
     // Clear interval after gameSequence plays to end
-    if (runCount >= seq.length - 1) {
+    if (runCount >= gameSequence.length - 1) {
       listenToPlayer = true;
       clearInterval(intervalId);
     }
 
     // Animate the sequential buttons
-    animate(seq[runCount]);
+    animate(gameSequence[runCount]);
     runCount += 1;
   }
   listenToPlayer = false;
@@ -112,11 +112,23 @@ function checkSequence() {
   if (playerSequence.length === gameSequence.length) {
     // Check to see if playerSequence has errors compared to gameSequence
     for (var i = 0; i < playerSequence.length; i += 1) {
-      if (!sequencesMatch()) {
+
+      if (!sequencesMatch() && strictMode) {
+      // First, if strict mode is on and sequences don't match, end game
         console.log("Player Loses function");
         levelSpace.innerHTML = "Game Over,<br>You Achieved Level " + currentLevel + "<br>Congratulations";
         resetGame();
-      } else { // If they match, add color to gameSequence and animateSequence
+      } else if (!sequencesMatch() && !strictMode) {
+      // Now, if strict mode is off and sequences don't match, restart level
+        animate(redButton);
+        animate(blueButton);
+        animate(greenButton);
+        animate(yellowButton);
+        playerSequence = [];
+        levelSpace.innerHTML = "Wrong Sequence, try again";
+        animateSequence()
+      } else { 
+      // If they match, add new random color to gameSequence and animateSequence
         incrementSuccess();
       }
     }
