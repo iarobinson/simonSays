@@ -1,12 +1,17 @@
 body {
   font-family: sans-serif;
   margin: 0px 0px 0px 0px;
+  background-color: black;
 }
 
 .mainGameButton {
   width: 50%;
   height: 200px;
   float: left;
+}
+
+p {
+  color: white;
 }
 
 /* .mainGameButton:hover {
@@ -28,8 +33,9 @@ button {
   font-size: 25px;
   margin: 20px 0px 0px 0px;
   border: none;
-  background-color: white;
+  background-color: black;
   padding: 0px 0px 0px 0px;
+  color: white;
 
 }
 
