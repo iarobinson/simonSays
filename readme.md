@@ -16,4 +16,3 @@ No libraries, just core technology.
 ## Problems
 * Users have infinite time to decide next color to click (add time limit to moves)
 * Make the display white text which overlays the color buttons for a cleaner look
-* Remove shadow around start/stop button and reset button that occurs when they are clicked
