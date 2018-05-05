@@ -13,6 +13,7 @@ var blueSound = new Audio("sounds/soundOfBlue.mp3");
 var greenSound = new Audio("sounds/soundOfGreen.mp3");
 var yellowSound = new Audio("sounds/soundOfYellow.mp3");
 var victorySound = new Audio("sounds/soundOfVictory.mp3");
+var defeatSound = new Audio("sounds/soundOfVictory.mp3");
 
 window.onload = init;
 
@@ -49,9 +50,9 @@ function startGame() {
 
 // Play the gameSequence
 function animateSequence() {
-  var runCount = 0;
   playerSequence = [];
 
+  var runCount = 0;
   function playSequence() {
     // Clear interval after gameSequence plays to end
     if (runCount >= gameSequence.length - 1) {
@@ -63,8 +64,8 @@ function animateSequence() {
     animate(gameSequence[runCount]);
     runCount += 1;
   }
-  listenToPlayer = false;
 
+  listenToPlayer = false;
   intervalId = setInterval(playSequence, 1000);
 }
 
@@ -107,7 +108,7 @@ function wrongSequenceTryAgain() {
   animate(yellowButton);
   playerSequence = [];
   levelSpace.innerHTML = "Wrong Sequence, try again";
-  animateSequence()
+  animateSequence();
 }
 
 // Checks if playersSequence matches gameSequence
@@ -117,28 +118,28 @@ function sequencesMatch() {
       return false;
     }
   }
-  
+
   return true;
 }
 
 // How the animation works
 function animate(element) {
   var animateIntervalId;
-  
+
   var opacity = 0.1;  // initial opacity
   element.style.display = "block";
-  
+
   function fadeAnimation() {
     if (opacity >= 1){
       clearInterval(animateIntervalId);
     }
-    
+
     element.style.opacity = opacity;
     element.style.filter = "alpha(opacity=" + opacity * 100 + ")";
     opacity += 0.1 * opacity;
     soundTheColor(element);
   }
-  
+
   animateIntervalId = setInterval(fadeAnimation, 10);
 }
 
@@ -162,16 +163,18 @@ function toggleStrict() {
 
 // What happens when a game is won
 function gameWon() {
-  victorySound.play();
   levelSpace.innerHTML = "Congratulations, You've Won";
+  listenToPlayer = false;
+  victorySound.play();
   clearGame();
 }
 
 // What happens when the game is lost
 function gameLost() {
   levelSpace.innerHTML = "Game Over, You Achieved Level " + currentLevel + " Congratulations";
-  clearGame();
   listenToPlayer = false;
+  defeatSound.play();
+  clearGame();
 }
 
 // Clears the sequences, currentlevel and current animation sequence
