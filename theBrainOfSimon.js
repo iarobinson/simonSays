@@ -6,6 +6,13 @@ var currentLevel = 0;
 var listenToPlayer = false;
 var strictMode = false;
 
+
+// Assign audio to variables
+var redSound = new Audio("sounds/soundOfRed.mp3");
+var blueSound = new Audio("sounds/soundOfBlue.mp3");
+var greenSound = new Audio("sounds/soundOfGreen.mp3");
+var yellowSound = new Audio("sounds/soundOfYellow.mp3");
+
 window.onload = init;
 function init() {
   // Assign variables to the four colored buttons
@@ -101,6 +108,7 @@ function animate(element) {
     element.style.opacity = opacity;
     element.style.filter = "alpha(opacity=" + opacity * 100 + ")";
     opacity += 0.5 * opacity;
+    soundTheColor(element);
   }
 
   animateIntervalId = setInterval(fadeAnimation, 10);
@@ -166,3 +174,17 @@ function toggleStrict() {
 function gameWon() {
   levelSpace.innerHTML = "Congratulations, You've Won";
 }
+
+// Play individual sound for each color
+function soundTheColor(color) {
+  if (color.id === "r") {
+    redSound.play();
+  } else if (color.id === "b") {
+    blueSound.play();
+  } else if (color.id === "g") {
+    greenSound.play();
+  } else if (color.id === "y") {
+    yellowSound.play();
+  }
+}
+
