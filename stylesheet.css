@@ -37,8 +37,14 @@ button {
 }
 
 #completedLevels {
-  font-size: 20px;
-  margin: 20px 0px 0px 0px;
+  font-size: 40px;
+  margin: 20px 0px 20px 0px;
+  /* The below CSS is aimed at centering the element on buttons */
+  /* position: absolute;
+  left: 200px;
+  top: 100px;
+  z-index: 1;
+  color: white; */
 }
 
 #strictMode {

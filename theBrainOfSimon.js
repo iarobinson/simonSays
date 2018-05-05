@@ -120,12 +120,13 @@ function checkSequence() {
     for (var i = 0; i < playerSequence.length; i += 1) {
       if (!sequencesMatch()) {
         console.log("Player Loses function");
-        levelSpace.innerHTML = "Game Over, You Achieved Level" + currentLevel + " | Congratulations";
+        levelSpace.innerHTML = "Game Over,<br>You Achieved Level " + currentLevel + "<br>Congratulations";
         resetGame();
       } else { // If they match, add color to gameSequence and animateSequence
         incrementSuccess();
       }
     }
+  }
 }
 
 function sequencesMatch() {
