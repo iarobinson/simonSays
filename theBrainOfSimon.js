@@ -108,10 +108,6 @@ function animate(element) {
 
 // This will test playerSequence against gameSequence
 function checkSequence() {
-  console.log(gameSequence, "<-gameSequence");
-  console.log(playerSequence, "<-playerSequence");
-  console.log(strictMode, "<-strictMode");
-
   if (playerSequence.length === gameSequence.length) {
     // Check to see if playerSequence has errors compared to gameSequence
     for (var i = 0; i < playerSequence.length; i += 1) {
