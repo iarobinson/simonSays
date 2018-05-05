@@ -1,11 +1,10 @@
 // Does the game listen to user input?
-var redButton, blueButton, greenButton, yellowButton;
+var redButton, blueButton, greenButton, yellowButton, intervalId;
 var gameSequence = [];
 var playerSequence = [];
 var currentLevel = 0;
 var listenToPlayer = false;
 var strictMode = false;
-var intervalId;
 
 window.onload = init;
 function init() {
@@ -23,7 +22,7 @@ function init() {
   var strictSwitch = document.getElementById("strictSwitch");
   var resetButton = document.getElementById("resetButton");
 
-  // Event listeners to trigger start and reset functions when buttons are clicked 
+  // Event listeners to trigger start and reset functions when buttons are clicked
   startStopButton.onclick = startGame;
   strictSwitch.onclick = toggleStrict;
   resetButton.onclick = resetGame;
@@ -56,7 +55,11 @@ function animateSequence() {
     runCount += 1;
   }
   listenToPlayer = false;
-  intervalId = setInterval(playSequence, 1000);
+  if (gameSequence.length > 20) {
+    gameWon();
+  } else {
+    intervalId = setInterval(playSequence, 1000);
+  }
 }
 
 // When player resets game
@@ -127,7 +130,7 @@ function checkSequence() {
         playerSequence = [];
         levelSpace.innerHTML = "Wrong Sequence, try again";
         animateSequence()
-      } else { 
+      } else {
       // If they match, add new random color to gameSequence and animateSequence
         incrementSuccess();
       }
@@ -163,5 +166,7 @@ function toggleStrict() {
   }
 }
 
-
-
+// What happens when a game is won
+function gameWon() {
+  levelSpace.innerHTML = "Congratulations, You've Won";
+}
