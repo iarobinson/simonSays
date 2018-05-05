@@ -15,6 +15,7 @@ var yellowSound = new Audio("sounds/soundOfYellow.mp3");
 var victorySound = new Audio("sounds/soundOfVictory.mp3");
 
 window.onload = init;
+
 function init() {
   // Assign variables to the four colored buttons
   redButton = document.getElementById("r");
@@ -69,10 +70,8 @@ function animateSequence() {
 
 // When player resets game
 function resetGame() {
-  gameSequence = [];
-  playerSequence = [];
-  currentLevel = 0;
-  clearInterval(intervalId);
+  clearGame();
+  levelSpace.innerHTML = "Press Start/Stop to Begin";
 }
 
 // Create a function which can add new random elements to an array.
@@ -118,6 +117,7 @@ function sequencesMatch() {
       return false;
     }
   }
+  
   return true;
 }
 
@@ -164,13 +164,22 @@ function toggleStrict() {
 function gameWon() {
   victorySound.play();
   levelSpace.innerHTML = "Congratulations, You've Won";
-  resetGame();
+  clearGame();
 }
 
 // What happens when the game is lost
 function gameLost() {
   levelSpace.innerHTML = "Game Over, You Achieved Level " + currentLevel + " Congratulations";
-  resetGame();
+  clearGame();
+  listenToPlayer = false;
+}
+
+// Clears the sequences, currentlevel and current animation sequence
+function clearGame() {
+  gameSequence = [];
+  playerSequence = [];
+  currentLevel = 0;
+  clearInterval(intervalId);
 }
 
 // Play individual sound for each color
@@ -185,7 +194,3 @@ function soundTheColor(color) {
     yellowSound.play();
   }
 }
-
-
-
-
