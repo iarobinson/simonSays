@@ -11,7 +11,7 @@ After finishing the book Head First HTML 5 I decided to do this next project wit
 
 I copied and modified some CSS code for the strict switch found on w3schools. Thank you w3schools.
 
-So yes, the technology desciption of this project is very simple. 
+So yes, the technology description of this project is very simple.
 
 No libraries, just core technology.
 
@@ -19,3 +19,4 @@ No libraries, just core technology.
 ## Problems
 * Users have infinite time to decide next color to click (add time limit to moves)
 * Make the display white text which overlays the color buttons for a cleaner look
+* Incrementally decrease the amount of time between when the game shows a move
